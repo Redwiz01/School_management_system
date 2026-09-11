@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>School Management System Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/students.css">
+</head>
+
+<body>
+    <div class="dashboard">
+
+        <header class="header">
+            <h1>School Management System</h1>
+            <div class="userProfile">
+                <span>Admin</span>
+                <span>👤</span>
+            </div>
+        </header>
+
+        <div class="dashboardBody">
+
+            <aside class="sidebar">
+                <h2>SMS</h2>
+                <nav>
+                    <a href="#" data-page="dashboard">Dashboard</a>
+                    <a href="#" data-page="students">Students</a>
+                    <a href="#" data-page="teachers">Teachers</a>
+                    <a href="#" data-page="classes">Classes</a>
+                    <a href="#" data-page="subjects">Subjects</a>
+                    <a href="#" data-page="exams">Exams</a>
+                    <a href="#" data-page="results">Results</a>
+                    <a href="#" data-page="fees">Fees</a>
+                    <a href="#" data-page="attendance">Attendance</a>
+                </nav>
+            </aside>
+
+            <main class="main" id="mainContent">
+                <section class="page dashboardPage pageOpen">
+                    <h2>Dashboard</h2>
+
+                    <section class="stats">
+
+                        <div class="card">
+                            <h3>Students</h3>
+                            <p>450</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Teachers</h3>
+                            <p>32</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Classes</h3>
+                            <p>18</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Attendance</h3>
+                            <p>92%</p>
+                        </div>
+
+                    </section>
+                </section>
+                <section class="page studentsPage">
+
+
+                    <!-- Students page header -->
+                    <div class="pageHeader">
+
+                        <div>
+                            <h2>Students</h2>
+                            <p>Manage student records</p>
+                        </div>
+
+                        <button id="addStudentBtn">
+                            Add Student
+                        </button>
+
+                    </div>
+
+
+                    <!-- Search and filter -->
+                    <div class="studentControls">
+
+                        <input type="search" id="studentSearch" placeholder="Search students...">
+
+                        <select id="classFilter">
+                            <option value="">All Classes</option>
+                            <option value="1">Form 1</option>
+                            <option value="2">Form 2</option>
+                            <option value="3">Form 3</option>
+                            <option value="4">Form 4</option>
+                        </select>
+
+                        <select id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+
+                    </div>
+                    <div class="studentTableContainer">
+                        <table>
+                            <thead class="studentTableHeader">
+                                <tr>
+                                    <th>Admission No.</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Class</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+
+                            </thead>
+                            <tbody class="studentTableBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Add Student form -->
+                    <div class="studentFormContainer" id="studentFormContainer">
+
+                        <form id="studentForm">
+
+                            <div class="formHeader">
+                                <h2>Add Student</h2>
+                            </div>
+
+
+                            <div class="formGroup">
+                                <div class="formGroupCont">
+
+                                    <label for="firstName">
+                                        First Name
+                                    </label>
+
+                                    <input type="text" id="firstName" name="first_name" required>
+                                </div>
+                                <div class="formGroupCont">
+
+                                    <label for="lastName">
+                                        Last Name
+                                    </label>
+
+                                    <input type="text" id="lastName" name="last_name" required>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+                                    <label for="admissionNumber">
+                                        Admission Number
+                                    </label>
+
+                                    <input type="text" id="admissionNumber" name="admission_number" required>
+                                </div>
+                                <div class="formGroupCont">
+
+                                    <label for="dateOfBirth">
+                                        Date of Birth
+                                    </label>
+
+                                    <input type="date" id="dateOfBirth" name="date_of_birth" required>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+                                    <label for="gender">
+                                        Gender
+                                    </label>
+
+                                    <select id="gender" name="gender" required>
+
+                                        <option value="">
+                                            Select gender
+                                        </option>
+
+                                        <option value="Male">
+                                            Male
+                                        </option>
+
+                                        <option value="Female">
+                                            Female
+                                        </option>
+
+                                    </select>
+                                </div>
+
+                                <div class="formGroupCont">
+
+                                    <label for="classId">
+                                        Class
+                                    </label>
+
+                                    <select id="classId" name="class_id" required>
+
+                                        <option value="">
+                                            Select class
+                                        </option>
+
+                                        <option value="1">
+                                            Form 1
+                                        </option>
+
+                                        <option value="2">
+                                            Form 2
+                                        </option>
+
+                                        <option value="3">
+                                            Form 3
+                                        </option>
+
+                                        <option value="4">
+                                            Form 4
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+                                    <label for="parentName">
+                                        Parent / Guardian Name
+                                    </label>
+
+                                    <input type="text" id="parentName" name="parent_name" required>
+                                </div>
+                                <div class="formGroupCont">
+
+                                    <label for="parentPhone">
+                                        Parent / Guardian Phone
+                                    </label>
+
+                                    <input type="tel" id="parentPhone" name="parent_phone" required>
+
+                                </div>
+
+                            </div>
+
+
+
+
+
+                            <div class="formGroupX">
+
+                                <label for="status">
+                                    Status
+                                </label>
+
+                                <select id="status" name="status" required>
+
+                                    <option value="active">
+                                        Active
+                                    </option>
+
+                                    <option value="inactive">
+                                        Inactive
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="formActions">
+
+                                <button type="button" id="cancelStudentBtn">
+                                    Cancel
+                                </button>
+
+                                <button type="submit">
+                                    Save Student
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </section>
+                <section class="teachersPage">
+                    <!-- Teachers page header -->
+                    <div class="pageHeader">
+
+                        <div>
+                            <h2>Teachers</h2>
+                            <p>Manage teacher records</p>
+                        </div>
+
+                        <button id="addTeacherBtn">
+                            Add Teacher
+                        </button>
+
+                    </div>
+
+
+                    <!-- Search and filter -->
+                    <div class="teacherControls">
+
+                        <input type="search" id="teacherSearch" placeholder="Search teachers...">
+
+                        <select id="subjectFilter">
+                            <option value="">All Subjects</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="English">English</option>
+                            <option value="Kiswahili">Kiswahili</option>
+                            <option value="Science">Science</option>
+                        </select>
+
+                        <select id="teacherStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- Teachers table -->
+                    <div class="teacherTableContainer">
+
+                        <table>
+
+                            <thead class="teacherTableHeader">
+                                <tr>
+                                    <th>Employee No.</th>
+                                    <th>Name</th>
+                                    <th>Subject</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="teacherTableBody">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <!-- Add Teacher form -->
+                    <div class="teacherFormContainer" id="teacherFormContainer">
+
+                        <form id="teacherForm">
+
+                            <div class="formHeader">
+                                <h2>Add Teacher</h2>
+                            </div>
+
+
+                            <!-- First name and last name -->
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+
+                                    <label for="teacherFirstName">
+                                        First Name
+                                    </label>
+
+                                    <input type="text" id="teacherFirstName" name="first_name" required>
+
+                                </div>
+
+
+                                <div class="formGroupCont">
+
+                                    <label for="teacherLastName">
+                                        Last Name
+                                    </label>
+
+                                    <input type="text" id="teacherLastName" name="last_name" required>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Employee number and date of birth -->
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+
+                                    <label for="employeeNumber">
+                                        Employee Number
+                                    </label>
+
+                                    <input type="text" id="employeeNumber" name="employee_number" required>
+
+                                </div>
+
+
+                                <div class="formGroupCont">
+
+                                    <label for="teacherDateOfBirth">
+                                        Date of Birth
+                                    </label>
+
+                                    <input type="date" id="teacherDateOfBirth" name="date_of_birth" required>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Gender and phone -->
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+
+                                    <label for="teacherGender">
+                                        Gender
+                                    </label>
+
+                                    <select id="teacherGender" name="gender" required>
+
+                                        <option value="">
+                                            Select gender
+                                        </option>
+
+                                        <option value="Male">
+                                            Male
+                                        </option>
+
+                                        <option value="Female">
+                                            Female
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="formGroupCont">
+
+                                    <label for="teacherPhone">
+                                        Phone Number
+                                    </label>
+
+                                    <input type="tel" id="teacherPhone" name="phone" required>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Email and subject -->
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+
+                                    <label for="teacherEmail">
+                                        Email
+                                    </label>
+
+                                    <input type="email" id="teacherEmail" name="email" required>
+
+                                </div>
+
+
+                                <div class="formGroupCont">
+
+                                    <label for="teacherSubject">
+                                        Subject
+                                    </label>
+
+                                    <select id="teacherSubject" name="subject" required>
+
+                                        <option value="">
+                                            Select subject
+                                        </option>
+
+                                        <option value="Mathematics">
+                                            Mathematics
+                                        </option>
+
+                                        <option value="English">
+                                            English
+                                        </option>
+
+                                        <option value="Kiswahili">
+                                            Kiswahili
+                                        </option>
+
+                                        <option value="Science">
+                                            Science
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Department -->
+                            <div class="formGroupX">
+
+                                <label for="teacherDepartment">
+                                    Department
+                                </label>
+
+                                <select id="teacherDepartment" name="department" required>
+
+                                    <option value="">
+                                        Select department
+                                    </option>
+
+                                    <option value="Languages">
+                                        Languages
+                                    </option>
+
+                                    <option value="Sciences">
+                                        Sciences
+                                    </option>
+
+                                    <option value="Humanities">
+                                        Humanities
+                                    </option>
+
+                                    <option value="Technical">
+                                        Technical
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- Status -->
+                            <div class="formGroupX">
+
+                                <label for="teacherStatus">
+                                    Status
+                                </label>
+
+                                <select id="teacherStatus" name="status" required>
+
+                                    <option value="active">
+                                        Active
+                                    </option>
+
+                                    <option value="inactive">
+                                        Inactive
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- Form actions -->
+                            <div class="formActions">
+
+                                <button type="button" id="cancelTeacherBtn">
+                                    Cancel
+                                </button>
+
+                                <button type="submit">
+                                    Save Teacher
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+</body>
+<script src="js/studentPage.js"></script>
+<script></script>
+
+</html>

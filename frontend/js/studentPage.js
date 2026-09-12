@@ -1,6 +1,7 @@
 let studentsPage = document.querySelector('.studentsPage');
 let pages = document.querySelectorAll('.page');
 let dashboardPage = document.querySelector('.dashboardPage');
+let teachersPage = document.querySelector('.teachersPage');
 let links = document.querySelectorAll('nav a');
 let addStudentBtn = document.querySelector('#addStudentBtn');
 let studentFormContainer = document.querySelector('.studentFormContainer');
@@ -36,10 +37,19 @@ links.forEach(link => {
             dashboardPage.classList.add('pageOpen');
 
         }
+
+        if (page === 'teachers') {
+            pages.forEach(page => {
+                page.classList.remove('pageOpen');
+            })
+            teachersPage.classList.add('pageOpen');
+        }
+
     })
 })
 
 addStudentBtn.addEventListener('click', () => {
+    console.log("addStudentBtn clicked");
     studentFormContainer.classList.add('formOpen');
 
 });

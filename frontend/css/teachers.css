@@ -1,0 +1,68 @@
+.teachersPage {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pageHeader button {
+    height: 30px;
+}
+
+.teacherControls {
+    display: flex;
+    gap: 40px;
+}
+
+.teacherFormContainer {
+    display: none;
+}
+
+.formOpen {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#teacherForm {
+    display: flex;
+    max-width: 80%;
+    flex-direction: column;
+    gap: 20px;
+    background-color: antiquewhite;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgb(255, 252, 205);
+    padding: 20px;
+}
+
+#teacherForm .formGroup {
+    display: flex;
+    gap: 20px;
+}
+
+#teacherForm .formGroupCont {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+    flex-basis: 0px;
+}
+
+#teacherForm .formGroupCont input,
+#teacherForm .formGroupCont select {
+    width: 100%;
+    box-sizing: border-box;
+}

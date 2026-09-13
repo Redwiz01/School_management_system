@@ -2,6 +2,15 @@ let addTeacherBtn = document.getElementById('addTeacherBtn');
 let teacherFormContainer = document.querySelector('.teacherFormContainer');
 let cancelTeacherBtn = document.getElementById('cancelTeacherBtn');
 let teacherForm = document.getElementById('teacherForm');
+let teacherTableBody = document.querySelector('.teacherTableBody');
+let subjectFilter = document.getElementById('subjectFilter');
+let teacherStatusFilter = document.getElementById('teacherStatusFilter');
+let teacherSearch = document.getElementById('teacherSearch');
+
+teacherSearch.addEventListener('input', loadTeacherRows);
+
+subjectFilter.addEventListener('change', loadTeacherRows);
+teacherStatusFilter.addEventListener('change', loadTeacherRows);
 
 addTeacherBtn.addEventListener('click', () => {
     teacherFormContainer.classList.add('formOpen');
@@ -55,4 +64,59 @@ teacherForm.addEventListener('submit', async (e) => {
 
     console.log(teacherData);
     teacherFormContainer.classList.remove('formOpen');
+    await loadTeacherRows();
 })
+
+async function loadTeacherRows() {
+    const res = await fetch("http://localhost:3000/teachers");
+    console.log("Response status:", res.status)
+    const data = await res.json();
+
+    console.log("Response data:", data);
+    console.log("Table body:", teacherTableBody);
+
+
+    if (res.ok) {
+        const teachers = data.teachers;
+        console.log("Teachers:", teachers);
+        console.log("Number of teachers:", teachers.length);
+
+        teacherTableBody.innerHTML = '';
+        teachers.forEach(teacher => {
+            if (teacherStatusFilter.value !== '' && teacherStatusFilter.value !== teacher.status) {
+                return;
+            }
+
+            if (subjectFilter.value !== '' && subjectFilter.value !== teacher.subject) {
+                return;
+            }
+
+            if (!(`${teacher.first_name} ${teacher.last_name}`.toLowerCase().includes(teacherSearch.value.toLowerCase()) || teacher.employee_number.includes(teacherSearch.value.toLowerCase()))) {
+                return;
+            }
+
+            console.log("Creating row for:", teacher);
+
+            let teacherRow = document.createElement('tr');
+            teacherRow.innerHTML = `
+            <td>${teacher.employee_number}</td>
+            <td>${teacher.first_name} ${teacher.last_name}</td>
+            <td>${teacher.subject}</td>
+            <td>${teacher.phone}</td>
+            <td>${teacher.status}</td>
+            <td class="teacherActions"><button class="editTeacherBtn">Edit</button>
+            <button class="deleteTeacherBtn">Delete</button></td>`
+
+            teacherTableBody.appendChild(teacherRow);
+            console.log("Row added:", teacherRow);
+            console.log("Rows currently in table:", teacherTableBody.children.length);
+
+
+        })
+    }
+    else {
+        alert(data.error);
+    }
+}
+
+loadTeacherRows();

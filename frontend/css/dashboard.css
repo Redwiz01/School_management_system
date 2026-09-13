@@ -67,6 +67,16 @@ nav a {
     padding: 8px 12px;
 }
 
+nav a::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: bisque;
+    margin: auto;
+
+}
+
 nav a:hover {
     background-color: antiquewhite;
 }

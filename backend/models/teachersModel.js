@@ -8,6 +8,11 @@ async function addTeacherToDb(first_name, last_name, employee_number, date_of_bi
     return result;
 }
 
+async function getTeachersFromDb() {
+    const [rows] = await db.query('SELECT * FROM teachers');
+
+    return rows;
+}
 
 
-module.exports = { addTeacherToDb };
+module.exports = { addTeacherToDb, getTeachersFromDb };

@@ -167,7 +167,6 @@ async function loadStudentRow() {
             if (res.ok) {
                 alert(data.message);
 
-                // Reload the table
                 await loadStudentRow();
 
             } else {

@@ -14,5 +14,19 @@ async function getTeachersFromDb() {
     return rows;
 }
 
+async function removeTeacherFromDb(id) {
+    const [result] = await db.query('DELETE FROM teachers WHERE id=?', [id]);
 
-module.exports = { addTeacherToDb, getTeachersFromDb };
+    return result;
+}
+
+async function updateTeacherRecords(id, employee_number, subject, phone, status) {
+    const [result] = await db.query('UPDATE teachers SET employee_number=?, subject=?, phone=?, status=? WHERE id=?',
+        [employee_number, subject, phone, status, id]
+    )
+
+    return result;
+}
+
+
+module.exports = { addTeacherToDb, getTeachersFromDb, removeTeacherFromDb, updateTeacherRecords };

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/students.css">
     <link rel="stylesheet" href="css/teachers.css">
+    <link rel="stylesheet" href="css/classes.css">
 </head>
 
 <body>
@@ -28,11 +29,9 @@
                     <a href="#" data-page="students">Students</a>
                     <a href="#" data-page="teachers">Teachers</a>
                     <a href="#" data-page="classes">Classes</a>
-                    <a href="#" data-page="subjects">Subjects</a>
                     <a href="#" data-page="exams">Exams</a>
-                    <a href="#" data-page="results">Results</a>
                     <a href="#" data-page="fees">Fees</a>
-                    <a href="#" data-page="attendance">Attendance</a>
+
                 </nav>
             </aside>
 
@@ -596,6 +595,102 @@
                     </div>
 
                 </section>
+                <section class="page classesPage" data-page="classes">
+
+                    <div class="pageHeader">
+                        <h2>Classes</h2>
+                        <button id="addClassBtn">Add Class</button>
+                    </div>
+
+                    <div class="classSummary">
+
+                        <div class="summaryCard">
+                            <h3>Total Classes</h3>
+                            <p id="totalClasses">0</p>
+                        </div>
+
+                        <div class="summaryCard">
+                            <h3>Active Classes</h3>
+                            <p id="activeClasses">0</p>
+                        </div>
+
+                        <div class="summaryCard">
+                            <h3>Total Students</h3>
+                            <p id="totalClassStudents">0</p>
+                        </div>
+
+                    </div>
+
+                    <div class="classFilters">
+
+                        <input type="search" id="classSearch" placeholder="Search classes...">
+
+                        <select id="classStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+
+                    </div>
+
+                    <div class="classFormContainer">
+
+                        <form id="classForm">
+
+                            <div class="formGroupCont">
+                                <label for="className">Class Name</label>
+                                <input type="text" id="className" required>
+                            </div>
+
+                            <div class="formGroupCont">
+                                <label for="classTeacher">Class Teacher</label>
+                                <select id="classTeacher">
+                                    <option value="">Select Class Teacher</option>
+                                </select>
+                            </div>
+
+                            <div class="formGroupCont">
+                                <label for="classStatus">Status</label>
+                                <select id="classStatus">
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+
+                            <div class="formActions">
+                                <button type="submit">Save Class</button>
+                                <button type="button" id="cancelClassBtn">
+                                    Cancel
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div class="classTableContainer">
+
+                        <table class="classTable">
+
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Class</th>
+                                    <th>Class Teacher</th>
+                                    <th>Students</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="classTableBody">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
 
             </main>
 
@@ -605,5 +700,6 @@
 </body>
 <script src="js/studentPage.js"></script>
 <script src="js/teacherPage.js"></script>
+<script src="js/classes.js"></script>
 
 </html>

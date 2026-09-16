@@ -11,6 +11,8 @@ let deleteStudentBtns = document.querySelectorAll('.deleteStudentBtn');
 let classFilter = document.getElementById('classFilter');
 let statusFilter = document.getElementById('statusFilter');
 let studentSearch = document.getElementById('studentSearch');
+let classesPage = document.querySelector('.classesPage');
+const studentTableBody = document.querySelector('.studentTableBody');
 
 classFilter.addEventListener('change', loadStudentRow);
 statusFilter.addEventListener('change', loadStudentRow);
@@ -43,6 +45,14 @@ links.forEach(link => {
                 page.classList.remove('pageOpen');
             })
             teachersPage.classList.add('pageOpen');
+        }
+
+        if (page === 'classes') {
+            pages.forEach(page => {
+                page.classList.remove('pageOpen');
+            })
+            classesPage.classList.add('pageOpen');
+
         }
 
     })
@@ -98,8 +108,6 @@ async function loadStudentRow() {
 
     const students = await res.json();
 
-    const studentTableBody = document.querySelector('.studentTableBody');
-
     studentTableBody.innerHTML = '';
 
     // Create the rows
@@ -126,7 +134,7 @@ async function loadStudentRow() {
             <td>${student.class_Id}</td>
             <td>${student.status}</td>
             <td class="studentActions">
-                <button class="editStudentBtn">Edit</button>
+                <button class="editStudentBtn" data-id="${student.id}">Edit</button>
                 <button 
                     class="deleteStudentBtn" 
                     data-id="${student.id}">
@@ -175,5 +183,49 @@ async function loadStudentRow() {
         });
     });
 }
+
+studentTableBody.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('editStudentBtn')) {
+        let studentRow = e.target.closest('tr');
+        let cells = studentRow.querySelectorAll('td');
+        cells[0].innerHTML = `<input type="text" value="${cells[0].textContent.trim()}">`
+        cells[3].innerHTML = `<select><option value="1">Form 1</option><option value="2">Form 2</option><option value="3">Form 3</option><option value="4">Form 4</option></select>`
+        cells[4].innerHTML = `<select><option value="active">active</option><option value="inactive">inactive</option></select>`
+
+        e.target.classList.add('saveStudentBtn');
+        e.target.classList.remove('editStudentBtn');
+        e.target.textContent = 'Save'
+    }
+
+    else if (e.target.classList.contains('saveStudentBtn')) {
+        let studentRow = e.target.closest('tr');
+        let studentId = e.target.dataset.id;
+
+        let admInput = studentRow.querySelector('input');
+        let selections = studentRow.querySelectorAll('select');
+
+        let admission_number = admInput.value;
+        let class_Id = selections[0].value;
+        let status = selections[1].value;
+
+        const res = await fetch(`http://localhost:3000/students/${studentId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ admission_number, class_Id, status })
+        })
+
+        const data = await res.json();
+        if (res.ok) {
+            alert(data.message);
+
+            await loadStudentRow();
+        }
+        else {
+            alert(data.error)
+        }
+
+
+    }
+})
 
 loadStudentRow();

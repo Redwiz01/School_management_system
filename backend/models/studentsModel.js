@@ -31,4 +31,11 @@ async function removeStudentFromDb(id) {
     return result;
 }
 
-module.exports = { findStudentByAdmission, addStudentToDb, getAllStudentsFromDb, removeStudentFromDb };
+async function updateStudentRecord(admission_number, class_Id, status, id) {
+    const [result] = await db.query('UPDATE students SET admission_number=?, class_Id=?, status=? WHERE id=?',
+        [admission_number, class_Id, status, id]
+    )
+    return result;
+}
+
+module.exports = { findStudentByAdmission, addStudentToDb, getAllStudentsFromDb, removeStudentFromDb, updateStudentRecord };

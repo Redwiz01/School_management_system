@@ -1,4 +1,4 @@
-const { findStudentByAdmission, addStudentToDb, getAllStudentsFromDb, removeStudentFromDb } = require('../models/studentsModel');
+const { findStudentByAdmission, addStudentToDb, getAllStudentsFromDb, removeStudentFromDb, updateStudentRecord } = require('../models/studentsModel');
 async function createStudent(req, res) {
 
     try {
@@ -64,6 +64,24 @@ async function deleteStudent(req, res) {
         return res.status(500).json({ error: "Internal server error" })
 
     }
+}
+
+async function updateStudent(req, res) {
+    try {
+        const { admission_number, class_Id, status } = req.body;
+        let id = req.params.id;
+
+        const result = await updateStudentRecord(admission_number, class_Id, status, id);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Cannot find student" });
+        }
+
+        res.status(200).json({ message: "Student update successful" })
+    }
+    catch (err) {
+        console.error(err)
+        return res.status(500).json({ error: "Internal server error" })
+    }
 
 }
-module.exports = { createStudent, getAllStudents, deleteStudent };
+module.exports = { createStudent, getAllStudents, deleteStudent, updateStudent }

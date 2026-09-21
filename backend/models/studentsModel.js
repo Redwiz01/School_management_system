@@ -38,4 +38,10 @@ async function updateStudentRecord(admission_number, class_Id, status, id) {
     return result;
 }
 
-module.exports = { findStudentByAdmission, addStudentToDb, getAllStudentsFromDb, removeStudentFromDb, updateStudentRecord };
+async function totalStudentsPerClass(id) {
+    const [rows] = await db.query('SELECT COUNT(*) AS count FROM students WHERE class_id=?', [id])
+
+    return rows[0].count;
+}
+
+module.exports = { findStudentByAdmission, addStudentToDb, getAllStudentsFromDb, removeStudentFromDb, updateStudentRecord, totalStudentsPerClass };

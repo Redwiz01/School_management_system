@@ -1,4 +1,4 @@
-const { findStudentByAdmission, addStudentToDb, getAllStudentsFromDb, removeStudentFromDb, updateStudentRecord } = require('../models/studentsModel');
+const { findStudentByAdmission, addStudentToDb, getAllStudentsFromDb, removeStudentFromDb, updateStudentRecord, totalStudentsPerClass } = require('../models/studentsModel');
 async function createStudent(req, res) {
 
     try {
@@ -84,4 +84,17 @@ async function updateStudent(req, res) {
     }
 
 }
-module.exports = { createStudent, getAllStudents, deleteStudent, updateStudent }
+
+async function totalStudentsInClass(req, res) {
+    try {
+        const id = req.params.id;
+        let total = await totalStudentsPerClass(id);
+        return res.status(200).json({ total: total });
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: "internal server error" });
+    }
+
+}
+module.exports = { createStudent, getAllStudents, deleteStudent, updateStudent, totalStudentsInClass }

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/students.css">
     <link rel="stylesheet" href="css/teachers.css">
     <link rel="stylesheet" href="css/classes.css">
+    <link rel="stylesheet" href="css/exams.css">
 </head>
 
 <body>
@@ -88,10 +89,6 @@
 
                         <select id="classFilter">
                             <option value="">All Classes</option>
-                            <option value="1">Form 1</option>
-                            <option value="2">Form 2</option>
-                            <option value="3">Form 3</option>
-                            <option value="4">Form 4</option>
                         </select>
 
                         <select id="statusFilter">
@@ -214,22 +211,6 @@
 
                                         <option value="">
                                             Select class
-                                        </option>
-
-                                        <option value="1">
-                                            Form 1
-                                        </option>
-
-                                        <option value="2">
-                                            Form 2
-                                        </option>
-
-                                        <option value="3">
-                                            Form 3
-                                        </option>
-
-                                        <option value="4">
-                                            Form 4
                                         </option>
 
                                     </select>
@@ -691,6 +672,217 @@
                     </div>
 
                 </section>
+                <section class="page examsPage" data-page="exams">
+
+                    <!-- Exams page header -->
+                    <div class="pageHeader">
+                        <div>
+                            <h2>Exams</h2>
+                            <p>Manage school examinations</p>
+                        </div>
+
+                        <button id="addExamBtn">
+                            Add Exam
+                        </button>
+                    </div>
+
+
+                    <!-- Exam summary -->
+                    <div class="examSummary">
+
+                        <div class="summaryCard">
+                            <h3>Total Exams</h3>
+                            <p id="totalExams">0</p>
+                        </div>
+
+                        <div class="summaryCard">
+                            <h3>Upcoming Exams</h3>
+                            <p id="upcomingExams">0</p>
+                        </div>
+
+                        <div class="summaryCard">
+                            <h3>Completed Exams</h3>
+                            <p id="completedExams">0</p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Search and filters -->
+                    <div class="examControls">
+
+                        <input type="search" id="examSearch" placeholder="Search exams...">
+
+                        <select id="examTermFilter">
+                            <option value="">All Terms</option>
+                            <option value="Term 1">Term 1</option>
+                            <option value="Term 2">Term 2</option>
+                            <option value="Term 3">Term 3</option>
+                        </select>
+
+                        <select id="examStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="Upcoming">Upcoming</option>
+                            <option value="Ongoing">Ongoing</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+
+                    </div>
+
+
+                    <!-- Add exam form -->
+                    <div class="examFormContainer">
+
+                        <form id="examForm">
+
+                            <div class="formHeader">
+                                <h2>Add Exam</h2>
+                            </div>
+
+
+                            <!-- Exam name and term -->
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+                                    <label for="examName">
+                                        Exam Name
+                                    </label>
+
+                                    <input type="text" id="examName" name="exam_name" placeholder="e.g. Mid Term Exam"
+                                        required>
+                                </div>
+
+
+                                <div class="formGroupCont">
+                                    <label for="examTerm">
+                                        Term
+                                    </label>
+
+                                    <select id="examTerm" name="term" required>
+                                        <option value="">
+                                            Select term
+                                        </option>
+
+                                        <option value="Term 1">
+                                            Term 1
+                                        </option>
+
+                                        <option value="Term 2">
+                                            Term 2
+                                        </option>
+
+                                        <option value="Term 3">
+                                            Term 3
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                            <!-- Academic year and status -->
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+                                    <label for="academicYear">
+                                        Academic Year
+                                    </label>
+
+                                    <input type="number" id="academicYear" name="academic_year" min="2000" max="2100"
+                                        required>
+                                </div>
+
+
+                                <div class="formGroupCont">
+                                    <label for="examStatus">
+                                        Status
+                                    </label>
+
+                                    <select id="examStatus" name="status" required>
+                                        <option value="Upcoming">
+                                            Upcoming
+                                        </option>
+
+                                        <option value="Ongoing">
+                                            Ongoing
+                                        </option>
+
+                                        <option value="Completed">
+                                            Completed
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                            <!-- Dates -->
+                            <div class="formGroup">
+
+                                <div class="formGroupCont">
+                                    <label for="startDate">
+                                        Start Date
+                                    </label>
+
+                                    <input type="date" id="startDate" name="start_date" required>
+                                </div>
+
+
+                                <div class="formGroupCont">
+                                    <label for="endDate">
+                                        End Date
+                                    </label>
+
+                                    <input type="date" id="endDate" name="end_date" required>
+                                </div>
+
+                            </div>
+
+
+                            <!-- Form actions -->
+                            <div class="formActions">
+
+                                <button type="submit" id="saveExamBtn">
+                                    Save Exam
+                                </button>
+
+                                <button type="button" id="cancelExamBtn">
+                                    Cancel
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- Exams table -->
+                    <div class="examTableContainer">
+
+                        <table class="examTable">
+
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Exam Name</th>
+                                    <th>Term</th>
+                                    <th>Academic Year</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="examTableBody">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
 
             </main>
 
@@ -701,5 +893,6 @@
 <script src="js/studentPage.js"></script>
 <script src="js/teacherPage.js"></script>
 <script src="js/classes.js"></script>
+<script src="js/exams.js"></script>
 
 </html>

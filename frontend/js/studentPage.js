@@ -12,7 +12,21 @@ let classFilter = document.getElementById('classFilter');
 let statusFilter = document.getElementById('statusFilter');
 let studentSearch = document.getElementById('studentSearch');
 let classesPage = document.querySelector('.classesPage');
+let examsPage = document.querySelector('.examsPage');
 const studentTableBody = document.querySelector('.studentTableBody');
+
+async function loadClassFilter() {
+    const res = await fetch(`http://localhost:3000/classes`);
+    const data = await res.json();
+
+    const classes = data.classes;
+
+    classes.forEach(classItem => {
+        classFilter.innerHTML += `<option value="${classItem.id}">${classItem.class_name}</option>`;
+    })
+
+}
+loadClassFilter();
 
 classFilter.addEventListener('change', loadStudentRow);
 statusFilter.addEventListener('change', loadStudentRow);
@@ -55,6 +69,13 @@ links.forEach(link => {
 
         }
 
+        if (page === "exams") {
+            pages.forEach(page => {
+                page.classList.remove('pageOpen');
+            })
+            examsPage.classList.add('pageOpen');
+        }
+
     })
 })
 
@@ -68,6 +89,17 @@ cancelStudentBtn.addEventListener('click', () => {
     studentFormContainer.classList.remove('formOpen');
 })
 
+async function loadClassSelection() {
+    const res = await fetch(`http://localhost:3000/classes`);
+    const data = await res.json();
+    const classes = data.classes;
+    let classSelect = document.getElementById('classId');
+
+    classes.forEach(classItem => {
+        classSelect.innerHTML += `<option value="${classItem.id}">${classItem.class_name}</option>`
+    })
+}
+loadClassSelection();
 studentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     let firstNameInput = document.getElementById('firstName');
@@ -79,6 +111,8 @@ studentForm.addEventListener('submit', async (e) => {
     let parentNameInput = document.getElementById('parentName');
     let parentPhoneInput = document.getElementById('parentPhone');
     let statusInput = document.getElementById('status');
+
+
 
     let studentData = {
         first_name: firstNameInput.value, last_name: lastNameInput.value, admission_number: admissionNumberInput.value, date_of_birth: dateOfBirthInput.value, gender: genderInput.value, class_Id: classInput.value, parent_name: parentNameInput.value, parent_phone: parentPhoneInput.value, status: statusInput.value
@@ -102,24 +136,58 @@ studentForm.addEventListener('submit', async (e) => {
     await loadStudentRow();
 
 })
+loadStudentRow();
 
 async function loadStudentRow() {
-    const res = await fetch('http://localhost:3000/students');
+    const studentRes = await fetch('http://localhost:3000/students');
+    const students = await studentRes.json();
 
-    const students = await res.json();
+    const classRes = await fetch('http://localhost:3000/classes');
+    const classData = await classRes.json();
+    const classes = classData.classes;
 
     studentTableBody.innerHTML = '';
 
-    // Create the rows
     students.forEach(student => {
-        if (classFilter.value !== '' && student.class_Id !== classFilter.value) {
+
+        // Find the class belonging to this student
+        const classItem = classes.find(classItem => {
+            return Number(classItem.id) === Number(student.class_id)
+        }
+        );
+
+        const className = classItem
+            ? classItem.class_name
+            : 'No Class Assigned';
+
+        // Filters
+        if (
+            classFilter.value !== '' &&
+            Number(student.class_id) !== Number(classFilter.value)
+        ) {
             return;
         }
-        if (statusFilter.value !== '' && student.status !== statusFilter.value) {
+
+        if (
+            statusFilter.value !== '' &&
+            student.status !== statusFilter.value
+        ) {
             return;
         }
+
         const studentSearchValue = studentSearch.value.toLowerCase();
-        if (studentSearchValue !== '' && !(`${student.first_name} ${student.last_name}`.toLowerCase().includes(studentSearchValue) || student.admission_number.toLowerCase().includes(studentSearchValue))) {
+
+        if (
+            studentSearchValue !== '' &&
+            !(
+                `${student.first_name} ${student.last_name}`
+                    .toLowerCase()
+                    .includes(studentSearchValue) ||
+                student.admission_number
+                    .toLowerCase()
+                    .includes(studentSearchValue)
+            )
+        ) {
             return;
         }
 
@@ -131,10 +199,15 @@ async function loadStudentRow() {
             <td>${student.admission_number}</td>
             <td>${student.first_name} ${student.last_name}</td>
             <td>${student.gender}</td>
-            <td>${student.class_Id}</td>
+            <td>${className}</td>
             <td>${student.status}</td>
             <td class="studentActions">
-                <button class="editStudentBtn" data-id="${student.id}">Edit</button>
+                <button 
+                    class="editStudentBtn" 
+                    data-id="${student.id}">
+                    Edit
+                </button>
+
                 <button 
                     class="deleteStudentBtn" 
                     data-id="${student.id}">
@@ -147,10 +220,11 @@ async function loadStudentRow() {
     });
 
 
-    const deleteStudentBtns = document.querySelectorAll('.deleteStudentBtn');
+    const deleteStudentBtns =
+        document.querySelectorAll('.deleteStudentBtn');
 
-    // Add event listener to each button
     deleteStudentBtns.forEach(button => {
+
         button.addEventListener('click', async () => {
 
             const confirmed = confirm(
@@ -174,9 +248,7 @@ async function loadStudentRow() {
 
             if (res.ok) {
                 alert(data.message);
-
                 await loadStudentRow();
-
             } else {
                 alert(data.error);
             }
@@ -186,10 +258,22 @@ async function loadStudentRow() {
 
 studentTableBody.addEventListener('click', async (e) => {
     if (e.target.classList.contains('editStudentBtn')) {
+        const classRes = await fetch('http://localhost:3000/classes');
+        const classData = await classRes.json();
+
+        let classOptions = '';
+
+        classData.classes.forEach(classItem => {
+            classOptions += `
+                <option value="${classItem.id}">
+                    ${classItem.class_name}
+                </option>
+            `;
+        });
         let studentRow = e.target.closest('tr');
         let cells = studentRow.querySelectorAll('td');
         cells[0].innerHTML = `<input type="text" value="${cells[0].textContent.trim()}">`
-        cells[3].innerHTML = `<select><option value="1">Form 1</option><option value="2">Form 2</option><option value="3">Form 3</option><option value="4">Form 4</option></select>`
+        cells[3].innerHTML = `<select>${classOptions}</select>`
         cells[4].innerHTML = `<select><option value="active">active</option><option value="inactive">inactive</option></select>`
 
         e.target.classList.add('saveStudentBtn');
@@ -228,4 +312,3 @@ studentTableBody.addEventListener('click', async (e) => {
     }
 })
 
-loadStudentRow();

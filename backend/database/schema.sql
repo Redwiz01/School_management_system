@@ -44,3 +44,14 @@ CREATE TABLE students (
     FOREIGN KEY (class_id)
         REFERENCES classes(id)
 );
+
+CREATE TABLE exams (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    exam_name VARCHAR(100) NOT NULL,
+    term VARCHAR(20) NOT NULL,
+    academic_year YEAR NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    status ENUM('upcoming', 'ongoing', 'completed') DEFAULT 'upcoming',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

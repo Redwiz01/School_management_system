@@ -13,4 +13,15 @@ async function getExamsFromDb() {
     return rows;
 }
 
-module.exports = { addExamToDb, getExamsFromDb };
+async function deleteExamFromDb(id) {
+    const [result] = await db.query('DELETE FROM exams WHERE id=?', [id]);
+    return result;
+}
+
+async function updateExamInDb(exam_name, start_date, end_date, status, id) {
+    const [result] = await db.query('UPDATE exams SET exam_name=?, start_date=?, end_date=?, status=? WHERE id=? ',
+        [exam_name, start_date, end_date, status, id]
+    )
+    return result;
+}
+module.exports = { addExamToDb, getExamsFromDb, deleteExamFromDb, updateExamInDb };

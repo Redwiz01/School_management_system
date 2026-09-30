@@ -13,6 +13,8 @@ let statusFilter = document.getElementById('statusFilter');
 let studentSearch = document.getElementById('studentSearch');
 let classesPage = document.querySelector('.classesPage');
 let examsPage = document.querySelector('.examsPage');
+let feesPage = document.querySelector('.feesPage');
+let resultsPage = document.querySelector('.resultsPage');
 const studentTableBody = document.querySelector('.studentTableBody');
 
 async function loadClassFilter() {
@@ -74,6 +76,20 @@ links.forEach(link => {
                 page.classList.remove('pageOpen');
             })
             examsPage.classList.add('pageOpen');
+        }
+
+        if (page === "fees") {
+            pages.forEach(page => {
+                page.classList.remove('pageOpen');
+            })
+            feesPage.classList.add('pageOpen');
+        }
+
+        if (page === "results") {
+            pages.forEach(page => {
+                page.classList.remove('pageOpen');
+            })
+            resultsPage.classList.add('pageOpen');
         }
 
     })

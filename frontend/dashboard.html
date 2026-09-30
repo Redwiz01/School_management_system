@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="css/teachers.css">
     <link rel="stylesheet" href="css/classes.css">
     <link rel="stylesheet" href="css/exams.css">
+    <link rel="stylesheet" href="css/fees.css">
+    <link rel="stylesheet" href="css/results.css">
+
 </head>
 
 <body>
@@ -32,6 +35,7 @@
                     <a href="#" data-page="classes">Classes</a>
                     <a href="#" data-page="exams">Exams</a>
                     <a href="#" data-page="fees">Fees</a>
+                    <a href="#" data-page="results">Results</a>
 
                 </nav>
             </aside>
@@ -883,6 +887,242 @@
                     </div>
 
                 </section>
+                <!-- Fees Page -->
+                <section class="page feesPage" data-page="fees">
+
+                    <div class="pageHeader">
+                        <div>
+                            <h2>Fee Payments</h2>
+                            <p>Manage and track student fee payments.</p>
+                        </div>
+
+                        <button id="addPaymentBtn" type="button">
+                            Record Payment
+                        </button>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="feesSummary">
+
+                        <div class="summaryCard">
+                            <h3>Total Payments</h3>
+                            <p id="totalPayments">0</p>
+                        </div>
+
+                        <div class="summaryCard">
+                            <h3>Total Collected</h3>
+                            <p id="totalCollected">KSh 0.00</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Record Payment Form -->
+                    <div class="paymentFormContainer">
+
+                        <form id="paymentForm">
+
+                            <h3 id="paymentFormTitle">Record Fee Payment</h3>
+
+                            <div class="formGroup">
+                                <label for="paymentStudent">Student</label>
+                                <select id="paymentStudent" name="student_id" required>
+                                    <option value="">Select Student</option>
+                                </select>
+                            </div>
+
+                            <div class="formGroup">
+                                <label for="paymentAmount">Amount (KSh)</label>
+                                <input type="number" id="paymentAmount" name="amount" min="0.01" step="0.01"
+                                    placeholder="Enter amount" required>
+                            </div>
+
+                            <div class="formGroup">
+                                <label for="paymentMethod">Payment Method</label>
+                                <select id="paymentMethod" name="payment_method" required>
+                                    <option value="">Select Method</option>
+                                    <option value="M-Pesa">M-Pesa</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Bank">Bank</option>
+                                </select>
+                            </div>
+
+                            <div class="formGroup">
+                                <label for="paymentReference">Reference</label>
+                                <input type="text" id="paymentReference" name="reference"
+                                    placeholder="e.g. M-Pesa transaction code">
+                            </div>
+
+                            <div class="formGroup">
+                                <label for="paymentDate">Payment Date</label>
+                                <input type="date" id="paymentDate" name="payment_date" required>
+                            </div>
+
+                            <div class="formActions">
+                                <button type="submit" id="savePaymentBtn">
+                                    Save Payment
+                                </button>
+
+                                <button type="button" id="cancelPaymentBtn">
+                                    Cancel
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <!-- Payments Table -->
+                    <div class="paymentsSection">
+
+                        <div class="paymentsHeader">
+                            <h3>Payment Records</h3>
+
+                            <div class="paymentFilters">
+
+                                <input type="text" id="paymentSearch"
+                                    placeholder="Search by name or admission number...">
+
+                                <select id="paymentMethodFilter">
+                                    <option value="">All Payment Methods</option>
+                                    <option value="M-Pesa">M-Pesa</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Bank">Bank</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="tableContainer">
+                            <table id="paymentsTable">
+
+                                <thead>
+                                    <tr>
+                                        <th>Admission No.</th>
+                                        <th>Student Name</th>
+                                        <th>Amount (KSh)</th>
+                                        <th>Payment Method</th>
+                                        <th>Reference</th>
+                                        <th>Payment Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="paymentsTableBody">
+                                    <!-- Payment records will be populated using JavaScript -->
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </section>
+                <section class="resultsPage page">
+
+                    <div class="pageHeader">
+                        <div>
+                            <h2>Results</h2>
+                            <p>Manage student examination results</p>
+                        </div>
+
+                        <button id="addResultBtn">Add Result</button>
+                    </div>
+
+                    <!-- Result Form -->
+                    <div class="resultFormContainer">
+
+                        <form id="resultForm">
+
+                            <div class="formGroup">
+                                <label for="resultStudent">Student</label>
+                                <select id="resultStudent" required>
+                                    <option value="">Select Student</option>
+                                </select>
+                            </div>
+
+                            <div class="formGroup">
+                                <label for="resultExam">Exam</label>
+                                <select id="resultExam" required>
+                                    <option value="">Select Exam</option>
+                                </select>
+                            </div>
+
+                            <div class="formGroup">
+                                <label for="resultMarks">Marks</label>
+                                <input type="number" id="resultMarks" min="0" step="0.01" required>
+                            </div>
+
+                            <div class="formGroup">
+                                <label for="resultGrade">Grade</label>
+                                <input type="text" id="resultGrade" readonly>
+                            </div>
+
+                            <div class="formActions">
+                                <button type="submit" id="saveResultBtn">
+                                    Save Result
+                                </button>
+
+                                <button type="button" id="cancelResultBtn">
+                                    Cancel
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- Filters -->
+                    <div class="resultsFilters">
+
+                        <div class="filterGroup">
+                            <label for="resultSearchInput">Student</label>
+                            <input type="text" id="resultSearchInput" placeholder="Search student...">
+                        </div>
+
+                        <div class="filterGroup">
+                            <label for="resultExamFilter">Exam</label>
+                            <select id="resultExamFilter">
+                                <option value="">All Exams</option>
+                            </select>
+                        </div>
+
+                        <div class="filterGroup">
+                            <label for="resultClassFilter">Class</label>
+                            <select id="resultClassFilter">
+                                <option value="">All Classes</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Results Table -->
+                    <div class="tableContainer">
+
+                        <table class="resultsTable">
+
+                            <thead>
+                                <tr>
+                                    <th>Admission No.</th>
+                                    <th>Student</th>
+                                    <th>Class</th>
+                                    <th>Exam</th>
+                                    <th>Marks</th>
+                                    <th>Grade</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="resultsTableBody">
+                                <!-- Results loaded here -->
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
 
             </main>
 
@@ -894,5 +1134,8 @@
 <script src="js/teacherPage.js"></script>
 <script src="js/classes.js"></script>
 <script src="js/exams.js"></script>
+<script src="js/fees.js"></script>
+<script src="js/results.js"></script>
+
 
 </html>

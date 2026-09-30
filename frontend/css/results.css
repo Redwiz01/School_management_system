@@ -1,0 +1,47 @@
+.resultFormContainer {
+    display: none;
+}
+
+.formOpen {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    background-color: rgb(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#resultForm {
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 15px;
+    background-color: antiquewhite;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgb(255, 252, 205);
+    padding: 30px;
+}
+
+#resultForm .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+}
+
+.resultsFilters {
+    display: flex;
+    gap: 20px;
+}
+
+.filterGroup {
+    display: flex;
+    gap: 5px;
+}

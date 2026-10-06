@@ -14,7 +14,7 @@ cancelClassBtn.addEventListener('click', () => {
 })
 
 async function loadTeacherSelection() {
-    const res = await fetch(`http://localhost:3000/teachers`);
+    const res = await authFetch(`http://localhost:3000/teachers`);
 
     const data = await res.json();
     if (!res.ok) {
@@ -39,7 +39,7 @@ classForm.addEventListener('submit', async (e) => {
 
     const classData = { class_name: classNameInput.value, class_teacher_id: classTeacherSelect.value, status: classStatusInput.value };
 
-    const res = await fetch(`http://localhost:3000/classes`, {
+    const res = await authFetch(`http://localhost:3000/classes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(classData)
@@ -60,7 +60,7 @@ classForm.addEventListener('submit', async (e) => {
 })
 
 async function getStudentCount(classId) {
-    const res = await fetch(`http://localhost:3000/students/class/${classId}`);
+    const res = await authFetch(`http://localhost:3000/students/class/${classId}`);
     const data = await res.json();
 
     const studentCount = data.total;
@@ -69,7 +69,7 @@ async function getStudentCount(classId) {
 }
 
 async function getTeachers() {
-    const res = await fetch(`http://localhost:3000/teachers`);
+    const res = await authFetch(`http://localhost:3000/teachers`);
     const data = await res.json();
 
     const teachers = data.teachers;
@@ -77,7 +77,7 @@ async function getTeachers() {
 }
 
 async function loadClassRow() {
-    const res = await fetch(`http://localhost:3000/classes`);
+    const res = await authFetch(`http://localhost:3000/classes`);
     const data = await res.json();
     if (!res.ok) {
         alert(data.error);
@@ -125,7 +125,7 @@ classTableBody.addEventListener('click', async (e) => {
             return;
         }
 
-        const res = await fetch(
+        const res = await authFetch(
             `http://localhost:3000/classes/${classId}`,
             {
                 method: 'DELETE'
@@ -228,7 +228,7 @@ classTableBody.addEventListener('click', async (e) => {
         let statusUpdate = statusSelect.value;
 
 
-        const res = await fetch(
+        const res = await authFetch(
             `http://localhost:3000/classes/${id}`,
             {
                 method: 'PUT',

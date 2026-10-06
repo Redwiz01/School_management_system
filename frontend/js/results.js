@@ -27,7 +27,7 @@ cancelResultBtn.addEventListener('click', () => {
 })
 
 async function studentSelect() {
-    const res = await fetch(`http://localhost:3000/students`);
+    const res = await authFetch(`http://localhost:3000/students`);
     const students = await res.json();
     students.forEach(student => {
         resultStudentInput.innerHTML += `
@@ -37,7 +37,7 @@ async function studentSelect() {
 studentSelect();
 
 async function examSelect() {
-    const res = await fetch(`http://localhost:3000/exams`);
+    const res = await authFetch(`http://localhost:3000/exams`);
     const data = await res.json();
     const exams = data.exams;
 
@@ -91,7 +91,7 @@ resultForm.addEventListener('submit', async (e) => {
         grade: resultGradeInput.value
     }
 
-    const res = await fetch('http://localhost:3000/results', {
+    const res = await authFetch('http://localhost:3000/results', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(resultData)
@@ -112,7 +112,7 @@ resultForm.addEventListener('submit', async (e) => {
 })
 
 async function fetchResults() {
-    const res = await fetch(`http://localhost:3000/results`);
+    const res = await authFetch(`http://localhost:3000/results`);
     const data = await res.json();
 
     const results = data.results;
@@ -120,13 +120,13 @@ async function fetchResults() {
 }
 
 async function loadResultRow() {
-    const studres = await fetch(`http://localhost:3000/students`);
+    const studres = await authFetch(`http://localhost:3000/students`);
     const students = await studres.json();
 
-    const examres = await fetch(`http://localhost:3000/exams`);
+    const examres = await authFetch(`http://localhost:3000/exams`);
     const data = await examres.json();
     const exams = data.exams;
-    const classres = await fetch(`http://localhost:3000/classes`);
+    const classres = await authFetch(`http://localhost:3000/classes`);
     const classdata = await classres.json();
     const classes = classdata.classes;
     const results = await fetchResults();

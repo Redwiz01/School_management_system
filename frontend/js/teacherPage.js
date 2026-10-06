@@ -47,7 +47,7 @@ teacherForm.addEventListener('submit', async (e) => {
         status: teacherStatusInput.value
     }
 
-    const res = await fetch(`http://localhost:3000/teachers`, {
+    const res = await authFetch(`http://localhost:3000/teachers`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(teacherData)
@@ -68,7 +68,7 @@ teacherForm.addEventListener('submit', async (e) => {
 })
 
 async function loadTeacherRows() {
-    const res = await fetch("http://localhost:3000/teachers");
+    const res = await authFetch("http://localhost:3000/teachers");
     console.log("Response status:", res.status)
     const data = await res.json();
 
@@ -126,7 +126,7 @@ teacherTableBody.addEventListener('click', async (e) => {
         if (!confirmed) {
             return;
         }
-        const res = await fetch(`http://localhost:3000/teachers/${teacherId}`, {
+        const res = await authFetch(`http://localhost:3000/teachers/${teacherId}`, {
             method: 'DELETE'
         })
 
@@ -166,7 +166,7 @@ teacherTableBody.addEventListener('click', async (e) => {
         const subject = inputs[1].value;
         const phone = inputs[2].value;
         const status = selectStatus.value;
-        const res = await fetch(`http://localhost:3000/teachers/${teacherId}`,
+        const res = await authFetch(`http://localhost:3000/teachers/${teacherId}`,
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },

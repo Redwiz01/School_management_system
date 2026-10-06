@@ -7,6 +7,8 @@ const classRoutes = require('./routes/classRoutes');
 const examRoutes = require('./routes/examRoutes');
 const feeRoutes = require('./routes/feeRoutes');
 const resultRoutes = require('./routes/resultRoutes');
+const attendanceRoutes = require('./routes/attendanceRoutes');
+const authRoutes = require('./routes/authRoutes');
 const path = require('path');
 require('dotenv').config();
 const port = process.env.PORT;
@@ -20,6 +22,8 @@ app.use('/classes', classRoutes);
 app.use('/exams', examRoutes);
 app.use('/fees', feeRoutes);
 app.use('/results', resultRoutes);
+app.use('/attendance', attendanceRoutes);
+app.use('/auth', authRoutes);
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 

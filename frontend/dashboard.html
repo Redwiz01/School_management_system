@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/exams.css">
     <link rel="stylesheet" href="css/fees.css">
     <link rel="stylesheet" href="css/results.css">
+    <link rel="stylesheet" href="css/attendance.css">
 
 </head>
 
@@ -36,6 +37,7 @@
                     <a href="#" data-page="exams">Exams</a>
                     <a href="#" data-page="fees">Fees</a>
                     <a href="#" data-page="results">Results</a>
+                    <a href="#" data-page="attendance">Attendance</a>
 
                 </nav>
             </aside>
@@ -1123,6 +1125,122 @@
                     </div>
 
                 </section>
+                <section class="attendancePage page">
+
+                    <div class="pageHeader">
+                        <div>
+                            <h2>Attendance</h2>
+                            <p>Manage student attendance</p>
+                        </div>
+
+                        <button id="markAttendanceBtn">Mark Attendance</button>
+                    </div>
+
+
+                    <!-- Attendance Form -->
+                    <div class="attendanceFormContainer">
+
+                        <form id="attendanceForm">
+
+                            <div class="formGroup">
+                                <label for="attendanceDate">Date</label>
+                                <input type="date" id="attendanceDate" required>
+                            </div>
+
+                            <div class="formGroup">
+                                <label for="attendanceClass">Class</label>
+                                <select id="attendanceClass" required>
+                                    <option value="">Select Class</option>
+                                </select>
+                            </div>
+
+
+                            <!-- Students will be loaded here -->
+                            <div class="attendanceStudentsContainer">
+                                <ul id="attendanceStudentsList">
+                                    <!-- Students will be inserted by JavaScript -->
+                                    <li>
+                                        <span>Student</span>
+                                        <span>Attendance</span>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+
+                            <div class="formActions">
+                                <button type="submit" id="saveAttendanceBtn">
+                                    Save Attendance
+                                </button>
+
+                                <button type="button" id="cancelAttendanceBtn">
+                                    Cancel
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- Attendance Filters -->
+                    <div class="attendanceFilters">
+
+                        <div class="filterGroup">
+                            <label for="attendanceDateFilter">Date</label>
+
+                            <input type="date" id="attendanceDateFilter">
+                        </div>
+
+
+                        <div class="filterGroup">
+                            <label for="attendanceClassFilter">Class</label>
+
+                            <select id="attendanceClassFilter">
+                                <option value="">All Classes</option>
+                            </select>
+                        </div>
+
+
+                        <div class="filterGroup">
+                            <label for="attendanceStatusFilter">Status</label>
+
+                            <select id="attendanceStatusFilter">
+                                <option value="">All Statuses</option>
+                                <option value="Present">Present</option>
+                                <option value="Absent">Absent</option>
+                                <option value="Late">Late</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Attendance Table -->
+                    <div class="tableContainer">
+
+                        <table class="attendanceTable">
+
+                            <thead>
+                                <tr>
+                                    <th>Admission No.</th>
+                                    <th>Student</th>
+                                    <th>Class</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="attendanceTableBody">
+                                <!-- Attendance records will be loaded here -->
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
 
             </main>
 
@@ -1130,12 +1248,14 @@
 
     </div>
 </body>
+<script src="js/auth.js"></script>
 <script src="js/studentPage.js"></script>
 <script src="js/teacherPage.js"></script>
 <script src="js/classes.js"></script>
 <script src="js/exams.js"></script>
 <script src="js/fees.js"></script>
 <script src="js/results.js"></script>
+<script src="js/attendance.js"></script>
 
 
 </html>

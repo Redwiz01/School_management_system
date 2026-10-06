@@ -13,7 +13,7 @@ paymentSearchInput.addEventListener('input', loadPaymentRow);
 paymentMethodFilter.addEventListener('change', loadPaymentRow);
 
 async function studentsDropDown() {
-    const res = await fetch(`http://localhost:3000/students`);
+    const res = await authFetch(`http://localhost:3000/students`);
     const students = await res.json();
 
     students.forEach(student => {
@@ -48,7 +48,7 @@ paymentForm.addEventListener('submit', async (e) => {
         payment_date: paymentDateInput.value
     }
 
-    const res = await fetch(`http://localhost:3000/fees`, {
+    const res = await authFetch(`http://localhost:3000/fees`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -71,7 +71,7 @@ paymentForm.addEventListener('submit', async (e) => {
 })
 
 async function fetchPayments() {
-    const res = await fetch(`http://localhost:3000/fees`);
+    const res = await authFetch(`http://localhost:3000/fees`);
     const data = await res.json();
     const payments = data.payments;
 
@@ -79,7 +79,7 @@ async function fetchPayments() {
 }
 
 async function filterStudent(id) {
-    const res = await fetch(`http://localhost:3000/students`);
+    const res = await authFetch(`http://localhost:3000/students`);
     const data = await res.json();
     const students = data;
 
@@ -127,7 +127,7 @@ paymentsTableBody.addEventListener('click', async (e) => {
             return;
         }
 
-        const res = await fetch(`http://localhost:3000/fees/${paymentId}`, {
+        const res = await authFetch(`http://localhost:3000/fees/${paymentId}`, {
             method: 'DELETE'
         })
         const data = await res.json();
@@ -143,7 +143,7 @@ paymentsTableBody.addEventListener('click', async (e) => {
 })
 
 async function loadSummaryCards() {
-    const res = await fetch(`http://localhost:3000/fees/summary`);
+    const res = await authFetch(`http://localhost:3000/fees/summary`);
     const data = await res.json();
     console.log(data);
     const summary = data.summary;

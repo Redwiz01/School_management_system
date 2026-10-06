@@ -15,10 +15,11 @@ let classesPage = document.querySelector('.classesPage');
 let examsPage = document.querySelector('.examsPage');
 let feesPage = document.querySelector('.feesPage');
 let resultsPage = document.querySelector('.resultsPage');
+let attendancePage = document.querySelector('.attendancePage');
 const studentTableBody = document.querySelector('.studentTableBody');
 
 async function loadClassFilter() {
-    const res = await fetch(`http://localhost:3000/classes`);
+    const res = await authFetch(`http://localhost:3000/classes`);
     const data = await res.json();
 
     const classes = data.classes;
@@ -92,6 +93,14 @@ links.forEach(link => {
             resultsPage.classList.add('pageOpen');
         }
 
+        if (page === "attendance") {
+            pages.forEach(page => {
+                page.classList.remove('pageOpen');
+            })
+            attendancePage.classList.add('pageOpen');
+
+        }
+
     })
 })
 
@@ -106,7 +115,7 @@ cancelStudentBtn.addEventListener('click', () => {
 })
 
 async function loadClassSelection() {
-    const res = await fetch(`http://localhost:3000/classes`);
+    const res = await authFetch(`http://localhost:3000/classes`);
     const data = await res.json();
     const classes = data.classes;
     let classSelect = document.getElementById('classId');
@@ -134,7 +143,7 @@ studentForm.addEventListener('submit', async (e) => {
         first_name: firstNameInput.value, last_name: lastNameInput.value, admission_number: admissionNumberInput.value, date_of_birth: dateOfBirthInput.value, gender: genderInput.value, class_Id: classInput.value, parent_name: parentNameInput.value, parent_phone: parentPhoneInput.value, status: statusInput.value
     }
     console.log(studentData);
-    const res = await fetch('http://localhost:3000/students', {
+    const res = await authFetch('http://localhost:3000/students', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(studentData)
@@ -155,10 +164,10 @@ studentForm.addEventListener('submit', async (e) => {
 loadStudentRow();
 
 async function loadStudentRow() {
-    const studentRes = await fetch('http://localhost:3000/students');
+    const studentRes = await authFetch('http://localhost:3000/students');
     const students = await studentRes.json();
 
-    const classRes = await fetch('http://localhost:3000/classes');
+    const classRes = await authFetch('http://localhost:3000/classes');
     const classData = await classRes.json();
     const classes = classData.classes;
 
@@ -253,7 +262,7 @@ async function loadStudentRow() {
 
             const studentId = button.dataset.id;
 
-            const res = await fetch(
+            const res = await authFetch(
                 `http://localhost:3000/students/${studentId}`,
                 {
                     method: 'DELETE'
@@ -274,7 +283,7 @@ async function loadStudentRow() {
 
 studentTableBody.addEventListener('click', async (e) => {
     if (e.target.classList.contains('editStudentBtn')) {
-        const classRes = await fetch('http://localhost:3000/classes');
+        const classRes = await authFetch('http://localhost:3000/classes');
         const classData = await classRes.json();
 
         let classOptions = '';

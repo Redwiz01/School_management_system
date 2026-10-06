@@ -40,7 +40,7 @@ examForm.addEventListener('submit', async (e) => {
         status: examStatusInput.value
     };
 
-    const res = await fetch(`http://localhost:3000/exams`, {
+    const res = await authFetch(`http://localhost:3000/exams`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(examData)
@@ -73,7 +73,7 @@ function formatDateForInput(date) {
 }
 
 async function loadExamRow() {
-    const res = await fetch(`http://localhost:3000/exams`);
+    const res = await authFetch(`http://localhost:3000/exams`);
     const data = await res.json();
     const exams = data.exams;
 
@@ -110,7 +110,7 @@ let upcomingExams = document.getElementById('upcomingExams');
 let completedExams = document.getElementById('completedExams');
 
 async function fetchExams() {
-    const res = await fetch(`http://localhost:3000/exams`);
+    const res = await authFetch(`http://localhost:3000/exams`);
     const data = await res.json();
     const exams = data.exams;
     return exams;
@@ -160,7 +160,7 @@ examTableBody.addEventListener('click', async (e) => {
         if (!confirmed) {
             return;
         }
-        const res = await fetch(`http://localhost:3000/exams/${examId}`, {
+        const res = await authFetch(`http://localhost:3000/exams/${examId}`, {
             method: 'DELETE'
         }
         )
@@ -212,7 +212,7 @@ examTableBody.addEventListener('click', async (e) => {
         const end_date = inputs[2].value;
         const status = statusSelect.value;
 
-        const res = await fetch(`http://localhost:3000/exams/${examId}`, {
+        const res = await authFetch(`http://localhost:3000/exams/${examId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ exam_name, start_date, end_date, status })

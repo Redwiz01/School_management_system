@@ -90,7 +90,6 @@ th {
 #studentForm {
     display: flex;
     max-width: 60%;
-    max-height: 60%;
     gap: 20px;
     flex-grow: 1;
     flex-basis: 0%;

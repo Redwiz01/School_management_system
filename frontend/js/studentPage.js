@@ -16,6 +16,8 @@ let examsPage = document.querySelector('.examsPage');
 let feesPage = document.querySelector('.feesPage');
 let resultsPage = document.querySelector('.resultsPage');
 let attendancePage = document.querySelector('.attendancePage');
+let userMngmntPage = document.querySelector('#usersPage');
+let mainContent = document.querySelector('#mainContent');
 const studentTableBody = document.querySelector('.studentTableBody');
 
 async function loadClassFilter() {
@@ -98,6 +100,14 @@ links.forEach(link => {
                 page.classList.remove('pageOpen');
             })
             attendancePage.classList.add('pageOpen');
+
+        }
+
+        if (page === "userManagement") {
+            pages.forEach(page => {
+                page.classList.remove('pageOpen');
+            })
+            userMngmntPage.classList.add('pageOpen');
 
         }
 

@@ -1,0 +1,28 @@
+#usersPage {
+    flex-direction: column;
+    align-items: center;
+}
+
+#userForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    background-color: antiquewhite;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgb(255, 252, 205);
+    padding: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+    flex-basis: 0;
+}

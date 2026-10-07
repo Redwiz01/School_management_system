@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/fees.css">
     <link rel="stylesheet" href="css/results.css">
     <link rel="stylesheet" href="css/attendance.css">
+    <link rel="stylesheet" href="css/users.css">
+
 
 </head>
 
@@ -38,6 +40,7 @@
                     <a href="#" data-page="fees">Fees</a>
                     <a href="#" data-page="results">Results</a>
                     <a href="#" data-page="attendance">Attendance</a>
+                    <a href="#" data-page="userManagement"> User Management </a>
 
                 </nav>
             </aside>
@@ -1241,6 +1244,54 @@
                     </div>
 
                 </section>
+                <section id="usersPage" class="page">
+
+                    <div class="page-header">
+                        <h2>User Management</h2>
+                        <p>Create accounts for teachers and finance staff.</p>
+                    </div>
+
+                    <div class="form-container">
+
+                        <form id="userForm">
+
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" placeholder="Enter username" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userEmail">Email</label>
+                                <input type="email" id="userEmail" name="email" placeholder="Enter email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userPassword">Password</label>
+                                <input type="password" id="userPassword" name="password" placeholder="Enter password"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userRole">Role</label>
+
+                                <select id="userRole" name="role" required>
+                                    <option value="">Select role</option>
+                                    <option value="teacher">Teacher</option>
+                                    <option value="finance">Finance</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" id="createUserButton">
+                                Create User
+                            </button>
+
+                            <p id="userMessage"></p>
+
+                        </form>
+
+                    </div>
+
+                </section>
 
             </main>
 
@@ -1249,6 +1300,7 @@
     </div>
 </body>
 <script src="js/auth.js"></script>
+<script src="js/main.js"></script>
 <script src="js/studentPage.js"></script>
 <script src="js/teacherPage.js"></script>
 <script src="js/classes.js"></script>

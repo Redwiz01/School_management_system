@@ -4,11 +4,14 @@ const jwt = require('jsonwebtoken');
 
 async function registerUser(req, res) {
     try {
-        const { username, email, password } = req.body;
-        if (!username || !email || !password) {
+        const { username, email, password, role } = req.body;
+        if (!username || !email || !password || !role) {
             return res.status(400).json({ error: "fill in required fields" })
         }
-        const role = "teacher";
+        const allowedRoles = ['teacher', 'finance'];
+        if (!allowedRoles.includes(role)) {
+            return res.status(400).json({ error: "Invalid role input" });
+        }
         let hashedPass = await bcrypt.hash(password, 10)
         const result = await addUserToDb(username, email, hashedPass, role);
         res.status(201).json({

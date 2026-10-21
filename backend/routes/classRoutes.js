@@ -6,7 +6,7 @@ const { authorizeRole } = require('../middleWare/authorizeRoles');
 console.log("getClasses route reached");
 
 router.post('/', authenticateToken, authorizeRole('admin'), createClass);
-router.get('/', authenticateToken, authorizeRole('admin', 'teacher'), getClasses);
+router.get('/', authenticateToken, authorizeRole('admin', 'teacher', 'finance'), getClasses);
 router.delete('/:id', authenticateToken, authorizeRole('admin'), deleteClass);
 router.put('/:id', authenticateToken, authorizeRole('admin'), editClass);
 

@@ -21,7 +21,6 @@ async function studentsDropDown() {
         <option value='${student.id}'>${student.first_name} ${student.last_name}</option>`
     })
 }
-studentsDropDown();
 
 addPaymentBtn.addEventListener('click', () => {
     paymentFormContainer.classList.add('formOpen');
@@ -159,6 +158,9 @@ async function loadSummaryCards() {
     totalPaymentsCard.textContent =
         Number(summary.total_payments).toLocaleString('en-KE');
 }
-loadSummaryCards();
-loadPaymentRow();
 
+async function initializePaymentsPage(params) {
+    await loadSummaryCards();
+    await loadPaymentRow();
+    await studentsDropDown();
+}

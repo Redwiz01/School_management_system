@@ -63,8 +63,6 @@ async function loadClassSelect() {
     });
 }
 
-loadClassSelect();
-
 async function loadAttendanceRow() {
     let class_Id = Number(attendanceClassInput.value);
     const studentRes = await authFetch('http://localhost:3000/students');
@@ -83,7 +81,6 @@ async function loadAttendanceRow() {
     })
 
 }
-loadAttendanceRow()
 
 function formatDate(date) {
     const dateObj = new Date(date);
@@ -135,4 +132,8 @@ async function loadAttendanceTable() {
     }
 }
 
-loadAttendanceTable();
+async function initializeAttendancePage() {
+    await loadAttendanceTable();
+    await loadAttendanceRow();
+    await loadClassSelect();
+}

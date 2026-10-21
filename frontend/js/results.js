@@ -34,7 +34,6 @@ async function studentSelect() {
         <option value="${student.id}">${student.first_name} ${student.last_name}</option>`
     });
 }
-studentSelect();
 
 async function examSelect() {
     const res = await authFetch(`http://localhost:3000/exams`);
@@ -47,7 +46,6 @@ async function examSelect() {
     })
 
 }
-examSelect();
 
 function calculateGrade() {
     resultMarksInput.addEventListener('input', () => {
@@ -159,4 +157,9 @@ async function loadResultRow() {
     }
 
 }
-loadResultRow();
+
+async function initializeResultsPage(params) {
+    await loadResultRow();
+    await examSelect();
+    await studentSelect();
+}

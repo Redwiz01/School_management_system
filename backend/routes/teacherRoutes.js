@@ -5,7 +5,7 @@ const { authenticateToken } = require('../middleWare/authMiddleware');
 const { authorizeRole } = require('../middleWare/authorizeRoles');
 
 router.post('/', authenticateToken, authorizeRole('admin'), createTeacher);
-router.get('/', authenticateToken, authorizeRole('admin', 'teacher'), getTeachers);
+router.get('/', authenticateToken, authorizeRole('admin', 'teacher', 'finance'), getTeachers);
 router.delete('/:id', authenticateToken, authorizeRole('admin'), deleteTeacher)
 router.put('/:id', authenticateToken, authorizeRole('admin'), updateTeacher);
 

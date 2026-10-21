@@ -13,6 +13,11 @@ cancelClassBtn.addEventListener('click', () => {
     classFormContainer.classList.remove('formOpen');
 })
 
+async function initializeClassesPage() {
+    await loadTeacherSelection();
+    await loadClassRow();
+}
+
 async function loadTeacherSelection() {
     const res = await authFetch(`http://localhost:3000/teachers`);
 
@@ -28,8 +33,6 @@ async function loadTeacherSelection() {
         <option value='${teacher.id}'>${teacher.first_name} ${teacher.last_name}</option>`
     });
 }
-
-loadTeacherSelection();
 
 classForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -109,7 +112,6 @@ async function loadClassRow() {
     }
 
 }
-loadClassRow();
 
 classTableBody.addEventListener('click', async (e) => {
 

@@ -20,6 +20,12 @@ let userMngmntPage = document.querySelector('#usersPage');
 let mainContent = document.querySelector('#mainContent');
 const studentTableBody = document.querySelector('.studentTableBody');
 
+async function initializeStudentsPage() {
+    await loadClassFilter();
+    await loadClassSelection();
+    await loadStudentRow();
+}
+
 async function loadClassFilter() {
     const res = await authFetch(`http://localhost:3000/classes`);
     const data = await res.json();
@@ -31,7 +37,7 @@ async function loadClassFilter() {
     })
 
 }
-loadClassFilter();
+
 
 classFilter.addEventListener('change', loadStudentRow);
 statusFilter.addEventListener('change', loadStudentRow);
@@ -134,7 +140,7 @@ async function loadClassSelection() {
         classSelect.innerHTML += `<option value="${classItem.id}">${classItem.class_name}</option>`
     })
 }
-loadClassSelection();
+
 studentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     let firstNameInput = document.getElementById('firstName');
@@ -171,7 +177,6 @@ studentForm.addEventListener('submit', async (e) => {
     await loadStudentRow();
 
 })
-loadStudentRow();
 
 async function loadStudentRow() {
     const studentRes = await authFetch('http://localhost:3000/students');

@@ -25,3 +25,4 @@ function getUserRole() {
 
     return payload.role;
 }
+

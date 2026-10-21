@@ -148,10 +148,7 @@ async function loadTotalExamsCard() {
 
     totalExams.textContent = exams.length;
 }
-loadTotalExamsCard();
-loadCompletedExamsCard();
-loadUpcomingExamsCard();
-loadExamRow();
+
 
 examTableBody.addEventListener('click', async (e) => {
     if (e.target.classList.contains('deleteExamBtn')) {
@@ -233,3 +230,10 @@ examTableBody.addEventListener('click', async (e) => {
     }
 
 })
+
+async function initializeExamsPage() {
+    await loadTotalExamsCard();
+    await loadCompletedExamsCard();
+    await loadUpcomingExamsCard();
+    await loadExamRow();
+}

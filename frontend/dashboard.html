@@ -32,15 +32,16 @@
             <aside class="sidebar">
                 <h2>SMS</h2>
                 <nav>
-                    <a href="#" data-page="dashboard">Dashboard</a>
-                    <a href="#" data-page="students">Students</a>
-                    <a href="#" data-page="teachers">Teachers</a>
-                    <a href="#" data-page="classes">Classes</a>
-                    <a href="#" data-page="exams">Exams</a>
-                    <a href="#" data-page="fees">Fees</a>
-                    <a href="#" data-page="results">Results</a>
-                    <a href="#" data-page="attendance">Attendance</a>
-                    <a href="#" data-page="userManagement"> User Management </a>
+                    <a href="#" data-page="dashboard" data-roles="admin, teacher, finance">Dashboard</a>
+                    <a href="#" data-page="students" data-roles="admin, teacher, finance">Students</a>
+                    <a href="#" data-page="teachers" data-roles="admin">Teachers</a>
+                    <a href="#" data-page="classes" data-roles="admin, teacher">Classes</a>
+                    <a href="#" data-page="exams" data-roles="admin, teacher">Exams</a>
+                    <a href="#" data-page="fees" data-roles="admin, finance">Fees</a>
+                    <a href="#" data-page="results" data-roles="admin, teacher">Results</a>
+                    <a href="#" data-page="attendance" data-roles="admin, teacher">Attendance</a>
+                    <a href="#" data-page="userManagement" data-roles="admin"> User Management </a>
+                    <button id="logoutBtn"> Logout </button>
 
                 </nav>
             </aside>
@@ -1300,7 +1301,6 @@
     </div>
 </body>
 <script src="js/auth.js"></script>
-<script src="js/main.js"></script>
 <script src="js/studentPage.js"></script>
 <script src="js/teacherPage.js"></script>
 <script src="js/classes.js"></script>
@@ -1308,6 +1308,7 @@
 <script src="js/fees.js"></script>
 <script src="js/results.js"></script>
 <script src="js/attendance.js"></script>
+<script src="js/main.js"></script>
 
 
 </html>

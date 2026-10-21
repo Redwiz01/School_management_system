@@ -118,6 +118,10 @@ async function loadTeacherRows() {
     }
 }
 
+async function initializeTeachersPage() {
+    await loadTeacherRows();
+}
+
 
 teacherTableBody.addEventListener('click', async (e) => {
     if (e.target.classList.contains('deleteTeacherBtn')) {
@@ -193,7 +197,6 @@ teacherTableBody.addEventListener('click', async (e) => {
 });
 
 
-loadTeacherRows();
 
 
 
